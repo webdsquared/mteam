@@ -1,0 +1,35 @@
+<% for group in @groups %>
+<h2><%= "Group: " + "#{group.name}" %></h2>
+<p><%= link_to "Edit Group", group %></p>
+<% end %>
+
+
+
+
+
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Departure</th>
+    <th>Arrival</th>
+    <th>Destination</th>
+    <th>Trip Length</th>
+    <th>Notes</th>
+  </tr>
+  <% for group in @groups %>
+    <tr>
+      <td><%= group.name %></td>
+      <td><%= group.departure %></td>
+      <td><%= group.arrival %></td>
+      <td><%= group.destination %></td>
+      <td><%= group.trip_length %></td>
+      <td><%= group.notes %></td>
+      <td><%= link_to "Show", group %></td>
+      <td><%= link_to "Edit", edit_group_path(group) %></td>
+      <td><%= link_to "Destroy", group, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Group", new_group_path %></p>

@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="span4">
+      <h3><%= "#{@member.first_name} #{@member.last_name}" %></h3>
+      <p><%= @member.street_address %><br>
+      <%= "#{@member.city}, #{@member.state} #{@member.zip}" %><br>
+      <%= @member.phone %><br>
+      <% if @member.alt_phone.present? %>
+      <%= @member.alt_phone %><br>
+      <% end %>
+      <%= mail_to @member.email %></p>
+      <h4>Notes:</h4>
+      <%= @member.notes %>
+    </div>
+    <div class="span8">
+      <!-- FUNDS -->
+      <div class="row">
+        <div class="span3">
+          <h3>Trip Cost: <%= number_to_currency @member.group.trip_cost %></h3>
+        </div>
+        <div class="span5">
+          <h3 class="pull-right">Funds Remaining: $2500.00</h3>
+        </div>
+      </div>
+
+      <h4><%= link_to "Add Payment" %></h4>
+
+      <%= form_for([@member, @member.payments.build]) do |f| %>
+        <%= f.date_select :date %>
+        <%= f.text_field :amount, placeholder: "Gift Amount" %>
+        <%= f.select :type, ['Check', 'Cash', 'Card'], prompt: "Select Gift Type" %>
+        <%= f.text_field :notes, placeholder: "Notes" %>
+        <%= f.submit "Add Payment", class: "btn" %>
+      <% end %>
+      <% if @payments.present? %>
+      <table class="table table-hover">
+      <% for payment in @payments %>
+        <tr>
+          <td>
+            <p>Sent check to the Bishops</p>
+          </td>
+          <td>&nbs;</td>
+          <td>
+            <h4 class="pull-right">$2500</h4>
+          </td>
+        </tr>
+      <% end %>
+      </table>
+      <% else %>
+      No gifts have been received.
+      <% end %>
+
+      <br><br><br>
+
+      <table class="table table-hover">
+        <tr>
+          <td>
+            <p>Sent check to the Bishops</p>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            <h4 class="pull-right">$2500</h4>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Sent check to the Bishops that will cover most of the trip but it is not a guarentee.  We will have to see if this is something that will carry over to the other things.</p>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            <h4 class="pull-right">$2500</h4>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Sent check to the Bishops</p>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            <h4 class="pull-right">$2500</h4>
+          </td>
+        </tr>
+      </table>      
+    </div>
+  </div>
+</div>
+
+
+
+

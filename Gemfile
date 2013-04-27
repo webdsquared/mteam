@@ -22,7 +22,8 @@ end
 
 gem 'jquery-rails'
 
-gem "nifty-generators", :group => :development
+gem "nifty-generators", :group => :development 	
+gem "twitter-bootstrap-rails"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -38,3 +39,5 @@ gem "nifty-generators", :group => :development
 
 # To use debugger
 # gem 'debugger'
+
+gem "mocha", :group => :test

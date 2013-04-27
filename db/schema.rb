@@ -11,6 +11,51 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130427203635) do
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.date     "departure"
+    t.date     "arrival"
+    t.string   "destination"
+    t.string   "trip_length"
+    t.text     "notes"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.decimal  "trip_cost",   :precision => 8, :scale => 2
+  end
+
+  create_table "members", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "phone"
+    t.string   "alt_phone"
+    t.string   "email"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "group_id"
+    t.text     "notes"
+  end
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "group_id"
+    t.integer  "member_id"
+    t.date     "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "payments", :force => true do |t|
+    t.decimal  "amount",     :precision => 8, :scale => 2
+    t.string   "type"
+    t.text     "notes"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.integer  "member_id"
+    t.date     "date"
+  end
 
 end

@@ -1,0 +1,33 @@
+<% title "Members" %>
+
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Street Address</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+    <th>Phone</th>
+    <th>Alt Phone</th>
+    <th>Email</th>
+  </tr>
+  <% for member in @members %>
+    <tr>
+      <td><%= member.first_name %></td>
+      <td><%= member.last_name %></td>
+      <td><%= member.street_address %></td>
+      <td><%= member.city %></td>
+      <td><%= member.state %></td>
+      <td><%= member.zip %></td>
+      <td><%= member.phone %></td>
+      <td><%= member.alt_phone %></td>
+      <td><%= member.email %></td>
+      <td><%= link_to "Show", member %></td>
+      <td><%= link_to "Edit", edit_member_path(member) %></td>
+      <td><%= link_to "Destroy", member, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Member", new_member_path %></p>

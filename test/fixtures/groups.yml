@@ -1,0 +1,15 @@
+one:
+  name: MyString
+  departure: 2013-04-26
+  arrival: 2013-04-26
+  destination: MyString
+  trip_length: MyString
+  notes: MyText
+
+two:
+  name: MyString
+  departure: 2013-04-26
+  arrival: 2013-04-26
+  destination: MyString
+  trip_length: MyString
+  notes: MyText

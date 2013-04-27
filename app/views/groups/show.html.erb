@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="span5">
+<h2><%= "Group: " + "#{@group.name}" %></h2>
+<p>Departure Date: <%= @group.departure.strftime("%m %d, %y") %><br>
+Arrival Date: <%= @group.arrival.strftime("%m %d, %y") %><br>
+Destination: <%= @group.destination %><br>
+Trip Length: <%= @group.trip_length %><br>
+Trip Cost: <%= number_to_currency @group.trip_cost %><br>
+Details: <%= @group.notes %></p>
+<p>
+  <%= link_to "Edit", edit_group_path(@group) %> |
+  <%= link_to "Destroy", @group, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", groups_path %>
+</p>
+    </div>
+    <div class="span7">
+      <h2>Group Members</h2>
+      
+      <!-- LINK TO TRIGGER MODAL -->
+      <p><a href="#myModal" role="button" data-toggle="modal">Add New Member</a></p>
+
+      <!-- MODAL -->
+      <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h3 id="myModalLabel">New Member</h3>
+        </div>
+        <div class="modal-body">
+          <%= form_for([@group, @group.members.build]) do |f| %>
+        <%= f.text_field :first_name, placeholder: "First Name" %><br>
+        <%= f.text_field :last_name, placeholder: "Last Name" %><br>
+        <%= f.text_field :street_address, placeholder: "Street Address" %><br>
+        <%= f.text_field :city, placeholder: "City" %><br>
+        <%= f.text_field :state, placeholder: "State" %><br>
+        <%= f.text_field :zip, placeholder: "Zip Code" %><br>
+        <%= f.text_field :phone, placeholder: "Phone" %><br>
+        <%= f.text_field :alt_phone, placeholder: "Alt Phone" %><br>
+        <%= f.text_field :email, placeholder: "Email" %><br>
+        <%= f.submit "Add Member", class: "btn" %>
+      <% end %>
+
+      
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+          <button class="btn btn-primary">Add Member</button>
+        </div>
+      </div>
+
+
+      <% for member in @member_list %>
+        <h4><%= link_to "#{member.first_name} #{member.last_name}", group_member_path(@group, member) %><h4>
+      <% end %>
+
+
+      
+
+    </div>
+  </div>
+</div>
+

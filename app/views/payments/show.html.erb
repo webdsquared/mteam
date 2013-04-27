@@ -1,0 +1,20 @@
+<% title "Payment" %>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @payment.amount %>
+</p>
+<p>
+  <strong>Type:</strong>
+  <%= @payment.type %>
+</p>
+<p>
+  <strong>Notes:</strong>
+  <%= @payment.notes %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_payment_path(@payment) %> |
+  <%= link_to "Destroy", @payment, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", payments_path %>
+</p>

@@ -1,0 +1,21 @@
+one:
+  first_name: MyString
+  last_name: MyString
+  street_address: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  phone: MyString
+  alt_phone: MyString
+  email: MyString
+
+two:
+  first_name: MyString
+  last_name: MyString
+  street_address: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  phone: MyString
+  alt_phone: MyString
+  email: MyString
