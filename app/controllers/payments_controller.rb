@@ -8,12 +8,14 @@ class PaymentsController < ApplicationController
   end
 
   def new
-    @member = Member.find(params[:member_id])
+    @group = Group.find(params[:group_id])
+    @member = @group.members.find(params[:member_id])
     @payment = @member.payments.new
   end
 
   def create
-    @member = Member.find(params[:member_id])
+    @group = Group.find(params[:group_id])
+    @member = @group.members.find(params[:member_id])
     @payment = @member.payments.create(params[:payment])
     if @payment.save
       redirect_to group_member_path(@group, @member), :notice => "Successfully created payment."

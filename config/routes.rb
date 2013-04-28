@@ -4,12 +4,11 @@ Mteam::Application.routes.draw do
   resources :payments
 
   resources :groups do 
-    resources :members
+    resources :members do
+      resources :payments
+    end
   end
 
-  resources :members do
-    resources :payments
-  end
 
   root to: 'pages#home'
 
