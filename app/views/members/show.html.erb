@@ -1,3 +1,4 @@
+<%= render 'partials/tempnav' %>
 <div class="container">
   <div class="row">
     <div class="span4">
@@ -11,6 +12,14 @@
       <%= mail_to @member.email %></p>
       <h4>Notes:</h4>
       <%= @member.notes %>
+      <br>
+      <h3>Group:</h3> 
+        <h4><%= link_to @member.group.name, group_path(@group) %></h4>
+      <br>
+      <h3>Group Members:</h3>
+      <% for member in @member_list %>
+        <h4><%= link_to "#{member.first_name} #{member.last_name}", group_member_path(@group, member) %></h4>
+      <% end %>
     </div>
     <div class="span8">
       <!-- FUNDS -->
@@ -19,16 +28,22 @@
           <h3>Trip Cost: <%= number_to_currency @member.group.trip_cost %></h3>
         </div>
         <div class="span5">
-          <h3 class="pull-right">Funds Remaining: $2500.00</h3>
+          <h3 class="pull-right">
+            <% if @member.payments.sum(:amount) >= @member.group.trip_cost %>
+            Funds Raised
+            <% else %>
+            Funds Needed: <%= number_to_currency @member.calculate_funds %>
+            <% end %>
+          </h3>
         </div>
       </div>
 
-      <h4><%= link_to "Add Payment" %></h4>
+      <h4><%= link_to "Add Gift" %></h4>
 
-      <%= form_for([@member, @member.payments.build]) do |f| %>
-        <%= f.date_select :date %>
+      <%= form_for([@group, @member, @member.payments.build]) do |f| %>
+        <%= f.text_field :date, class: "datepicker", placeholder: "Date Recieved" %>
         <%= f.text_field :amount, placeholder: "Gift Amount" %>
-        <%= f.select :type, ['Check', 'Cash', 'Card'], prompt: "Select Gift Type" %>
+        <%= f.select :payment_method, ['Check', 'Cash', 'Card'], prompt: "Select Gift Type" %>
         <%= f.text_field :notes, placeholder: "Notes" %>
         <%= f.submit "Add Payment", class: "btn" %>
       <% end %>
@@ -37,11 +52,16 @@
       <% for payment in @payments %>
         <tr>
           <td>
-            <p>Sent check to the Bishops</p>
+            <p><%= payment.date %></p>
           </td>
-          <td>&nbs;</td>
           <td>
-            <h4 class="pull-right">$2500</h4>
+            <p><%= payment.payment_method %></p>
+          </td>
+          <td>
+            <p><%= payment.notes %></p>
+          </td>
+          <td>
+            <h4 class="pull-right"><%= number_to_currency payment.amount %></h4>
           </td>
         </tr>
       <% end %>
@@ -50,40 +70,11 @@
       No gifts have been received.
       <% end %>
 
-      <br><br><br>
-
-      <table class="table table-hover">
-        <tr>
-          <td>
-            <p>Sent check to the Bishops</p>
-          </td>
-          <td>&nbsp;</td>
-          <td>
-            <h4 class="pull-right">$2500</h4>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p>Sent check to the Bishops that will cover most of the trip but it is not a guarentee.  We will have to see if this is something that will carry over to the other things.</p>
-          </td>
-          <td>&nbsp;</td>
-          <td>
-            <h4 class="pull-right">$2500</h4>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p>Sent check to the Bishops</p>
-          </td>
-          <td>&nbsp;</td>
-          <td>
-            <h4 class="pull-right">$2500</h4>
-          </td>
-        </tr>
-      </table>      
+         
     </div>
   </div>
 </div>
+
 
 
 
