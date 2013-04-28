@@ -3,4 +3,8 @@ class Member < ActiveRecord::Base
 
   belongs_to :group
   has_many :payments
+
+  def calculate_funds
+  	self.group.trip_cost - self.payments.sum(:amount)
+  end
 end

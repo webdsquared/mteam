@@ -6,7 +6,7 @@ class MembersController < ApplicationController
   def show
     @group = Group.find(params[:group_id])
     @member = @group.members.find(params[:id])
-
+    @member_list = @group.members.all
     @payments = @member.payments.all
   end
 
